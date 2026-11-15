@@ -30,12 +30,12 @@ Pipeline выполняет следующие этапы:
 
 ### 3. Структура проекта
 
-- `config.py` — конфигурация Spark и Hadoop.
-- `flow.py` — Prefect Flow и управление задачами.
-- `spark_job.py` — обработка данных с помощью Spark.
-- `run.sh` — скрипт запуска pipeline.
-- `requirements.txt` — зависимости Python.
-- `README.md` — документация.
+- `config.py` - конфигурация Spark и Hadoop.
+- `flow.py` - Prefect Flow и управление задачами.
+- `spark_job.py` - обработка данных с помощью Spark.
+- `run.sh` - скрипт запуска pipeline.
+- `requirements.txt` - зависимости Python.
+- `README.md` - документация.
 
 ### 4. Входные данные
 
@@ -45,9 +45,9 @@ Pipeline выполняет следующие этапы:
 
 Используются следующие поля:
 
-- `id` — идентификатор клиента.
-- `city` — город.
-- `status` — статус клиента.
+- `id` - идентификатор клиента.
+- `city` - город.
+- `status` - статус клиента.
 
 ### 5. Трансформация данных
 
@@ -86,8 +86,8 @@ Pipeline выполняет следующие этапы:
 
 Prefect Flow состоит из двух задач:
 
-- `run_spark_job` — запускает Spark-приложение через `spark-submit` с параметром `--master yarn`.
-- `verify_hdfs_output` — проверяет наличие результатов обработки в HDFS.
+- `run_spark_job` - запускает Spark-приложение через `spark-submit` с параметром `--master yarn`.
+- `verify_hdfs_output` - проверяет наличие результатов обработки в HDFS.
 
 Spark-приложение выполняется на YARN в режиме client.
 
@@ -130,7 +130,7 @@ source .venv/bin/activate
 
 ### 10.1. Успешное выполнение Prefect Flow
 
-На скриншоте показано успешное выполнение пайплайна `Team 12 - Homework 5 Data Pipeline`. Обе задачи — `Run Spark job` и `Verify HDFS output` — завершились успешно. Итоговый статус выполнения — `Completed()`.
+На скриншоте показано успешное выполнение пайплайна `Team 12 - Homework 5 Data Pipeline`. Обе задачи - `Run Spark job` и `Verify HDFS output` - завершились успешно. Итоговый статус выполнения - `Completed()`.
 
 ![Успешное выполнение Prefect Flow](screenshots/prefect_flow.png)
 
