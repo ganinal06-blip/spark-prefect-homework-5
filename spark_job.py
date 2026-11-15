@@ -23,7 +23,7 @@ spark = (
 )
 
 try:
-    print("=== STEP 1: Reading data from HDFS ===")
+    print("STEP 1: Reading data from HDFS")
 
     df = (
         spark.read
@@ -40,7 +40,7 @@ try:
             f"Missing required columns: {missing_columns}"
         )
 
-    print("=== STEP 2: Transforming data ===")
+    print("STEP 2: Transforming data")
 
     df_clean = (
         df
@@ -50,7 +50,7 @@ try:
         .filter(col("status").isNotNull())
     )
 
-    print("=== STEP 3: Aggregating data ===")
+    print("STEP 3: Aggregating data")
 
     df_result = (
         df_clean
@@ -62,10 +62,10 @@ try:
         .orderBy("status")
     )
 
-    print("=== Aggregation result ===")
+    print("Aggregation result")
     df_result.show(truncate=False)
 
-    print("=== STEP 4: Saving Parquet and registering table ===")
+    print("STEP 4: Saving Parquet and registering table")
 
     spark.sql(
         f"CREATE DATABASE IF NOT EXISTS {DATABASE_NAME}"
@@ -83,13 +83,13 @@ try:
         .saveAsTable(FULL_TABLE_NAME)
     )
 
-    print("=== STEP 5: Checking saved table ===")
+    print("STEP 5: Checking saved table")
 
     spark.sql(
         f"SELECT * FROM {FULL_TABLE_NAME}"
     ).show(truncate=False)
 
-    print("=== SUCCESS: Spark pipeline completed ===")
+    print("SUCCESS: Spark pipeline completed")
 
 finally:
     spark.stop()
