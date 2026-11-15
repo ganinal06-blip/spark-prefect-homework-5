@@ -124,27 +124,52 @@ source .venv/bin/activate
 
 Скрипт автоматически запускает Prefect Flow, который последовательно выполняет обработку данных и проверку результатов.
 
-### 10. Проверка результатов
+## 10. Результаты выполнения
 
-Проверить выходную директорию:
+В данном разделе представлены скриншоты, подтверждающие выполнение основных этапов работы: запуск пайплайна Prefect, выполнение Spark-приложения на YARN, сохранение результатов в HDFS, регистрацию таблицы в Hive Metastore и проверку итоговых данных.
 
-```bash
-hdfs dfs -ls -R /user/team/hw5_output/customer_stats
-```
+### 10.1. Успешное выполнение Prefect Flow
 
-Проверить файл успешного завершения записи:
+На скриншоте показано успешное выполнение пайплайна `Team 12 - Homework 5 Data Pipeline`. Обе задачи — `Run Spark job` и `Verify HDFS output` — завершились успешно. Итоговый статус выполнения — `Completed()`.
 
-```bash
-hdfs dfs -test -e /user/team/hw5_output/customer_stats/_SUCCESS && echo SUCCESS
-```
+![Успешное выполнение Prefect Flow](screenshots/prefect_flow.png)
 
-Проверить таблицу через Spark SQL:
+### 10.2. Выполнение Spark-приложения на YARN
+
+На скриншоте показан статус Spark-приложения `team12_hw5_data_pipeline` в YARN. Приложение завершилось успешно: `State: FINISHED`, `Final-State: SUCCEEDED`.
+
+![Статус Spark-приложения в YARN](screenshots/yarn_application.png)
+
+### 10.3. Проверка выходных данных в HDFS
+
+На скриншоте показано содержимое выходной директории `/user/team/hw5_output/customer_stats`. Результаты сохранены в формате Parquet. Наличие файла `_SUCCESS` подтверждает успешное завершение записи данных в HDFS.
+
+![Результаты в HDFS](screenshots/hdfs_output.png)
+
+### 10.4. Регистрация таблицы в Hive Metastore
+
+На скриншоте показан результат выполнения SQL-команды `SHOW TABLES IN team12_hw5;`. В базе данных `team12_hw5` зарегистрирована итоговая таблица `customer_stats`.
+
+![Таблица в Hive Metastore](screenshots/hive_table.png)
+
+### 10.5. Проверка итоговых данных
+
+На скриншоте представлен результат SQL-запроса:
 
 ```sql
-SHOW DATABASES;
-SHOW TABLES IN team12_hw5;
 SELECT * FROM team12_hw5.customer_stats;
 ```
+
+В таблице содержатся агрегированные данные по двум категориям клиентов:
+
+| status | customer_count | unique_cities |
+|---|---:|---:|
+| new | 6 | 5 |
+| regular | 4 | 4 |
+
+Таким образом, проверено наличие итоговых данных и корректность формирования агрегированной таблицы.
+
+![Результат SQL-запроса](screenshots/sql_result.png)
  
 ### 11. Результаты выполнения
 
